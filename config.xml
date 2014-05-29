@@ -1,0 +1,12 @@
+<?xml version='1.0' encoding='utf-8'?>
+<widget id="br.com.dumba.labs" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+    <name>dumba.labs</name>
+    <description>
+        Dumba labs
+    </description>
+    <author email="dev@dumba.com.br" href="https://labs.dumba.com.br">
+        Dumba Team
+    </author>
+    <content src="index.html" />
+    <access origin="*" />
+</widget>
