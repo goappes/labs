@@ -1,10 +1,11 @@
 angular.module('app.app-ctrl', [])
 
-.controller('AppCtrl', function ($scope, $state) {
+.controller('AppCtrl', function ($scope, $state, auth) {
   $scope.$state = $state;
+  $scope.auth = auth;
 })
 
-.config(function ($stateProvider, $urlRouterProvider){
+.config(function ($stateProvider, $urlRouterProvider) {
   $urlRouterProvider
     .when('', '/')
     .otherwise('/');

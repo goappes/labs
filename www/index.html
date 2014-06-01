@@ -10,20 +10,32 @@
     <title>Dumba Labs</title>
   </head>
   <body>
+    <div id="fb-root"></div>
     <ui-view></ui-view>
 
+    <!--
+    <div class="event listening button" onclick="login();">Login with Facebook</div>
+    <div class="event listening button" onclick="showDialog();">Show Dialog with Facebook</div>
+    <div class="event listening button" onclick="apiTest();">Test API with Facebook</div>
+    <div class="event listening button" onclick="getAccessToken();">Get access token with Facebook</div>
+    <div class="event listening button" onclick="getStatus();">Get login status with Facebook</div>
+    <div class="event listening button" onclick="logout();">Logout with Facebook</div> -->
+    
     <!-- cordova -->
     <script type="text/javascript" src="cordova.js"></script>
-
+    <script type="text/javascript" src="scripts/facebookConnectPlugin.js"></script>
+    
     <!-- vendors -->
     <script type="text/javascript" src="bower_components/angular/angular.min.js"></script>
     <script type="text/javascript" src="bower_components/angular-touch/angular-touch.min.js"></script>
     <script type="text/javascript" src="bower_components/angular-ui-router/release/angular-ui-router.min.js"></script>
-
+    
     <!-- app -->
     <script type="text/javascript" src="scripts/dashboard/dashboard-ctrl.js"></script>
     
+    <script type="text/javascript" src="scripts/app/auth.js"></script>
     <script type="text/javascript" src="scripts/app/app-ctrl.js"></script>
+
     <script type="text/javascript" src="scripts/app.js"></script>
   </body>
 </html>

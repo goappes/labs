@@ -1,4 +1,5 @@
 angular.module('app.root', [
+  'app.auth',
   'app.app-ctrl'
 ]);
 
@@ -7,7 +8,7 @@ angular.module('app.dashboard', [
 ]);
 
 angular.module('app', [
-  'ui.router'
+  'ui.router',
   'app.root',
   'app.dashboard'
 ]);
