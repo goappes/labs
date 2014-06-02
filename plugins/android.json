@@ -31,6 +31,10 @@
                         {
                             "xml": "<access origin=\"https://*.akamaihd.net\" />",
                             "count": 1
+                        },
+                        {
+                            "xml": "<feature name=\"SplashScreen\"><param name=\"android-package\" value=\"org.apache.cordova.splashscreen.SplashScreen\" /></feature>",
+                            "count": 1
                         }
                     ]
                 }
@@ -69,6 +73,12 @@
         "com.phonegap.plugins.facebookconnect": {
             "APP_ID": "322563021191242",
             "APP_NAME": "sandbox",
+            "PACKAGE_NAME": "br.com.dumba.labs"
+        },
+        "org.apache.cordova.splashscreen": {
+            "PACKAGE_NAME": "br.com.dumba.labs"
+        },
+        "org.apache.cordova.statusbar": {
             "PACKAGE_NAME": "br.com.dumba.labs"
         }
     },

@@ -3,8 +3,8 @@ angular.module('app.auth', [])
 .factory('auth', function () {
   return {
     login: function () {
-      facebookConnectPlugin.login( ["email"], 
-        function (response) { console.log('login success', response) },
+      facebookConnectPlugin.login(["email"], 
+        function (response) { console.log('login success' + JSON.stringify(response)) },
         function (response) { console.log('login success', response) })
     },
     logout: function () {
@@ -14,8 +14,8 @@ angular.module('app.auth', [])
     },
     getLoginStatus: function () {
       facebookConnectPlugin.getLoginStatus( 
-        function (response) { console.log('getLoginStatus success', response) },
-        function (response) { console.log('getLoginStatus error', response) });
+        function (response) { console.log('getLoginStatus success' + JSON.stringify(response)) },
+        function (response) { console.log('getLoginStatus error' + JSON.stringify(response)) });
     },
     getAccessToken: function () { 
       facebookConnectPlugin.getAccessToken( 

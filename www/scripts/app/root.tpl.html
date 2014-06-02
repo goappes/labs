@@ -1,6 +1,40 @@
-<div class="container">
+<!-- <div class="container">
   <ui-view></ui-view>
   <button ng-click="auth.login()">Login()</button>
   <button ng-click="auth.logout()">Logout()</button>
   <button ng-click="auth.getLoginStatus()">GetLoginStatus()</button>
-</div>
+</div> -->
+
+<ion-side-menus>
+  <ion-side-menu-content>
+    <ion-nav-bar class="bar-stable">
+      <ion-nav-back-button class="button-icon ion-chevron-left"></ion-nav-back-button>
+    </ion-nav-bar>
+    <ion-nav-buttons side="left">
+      <button menu-toggle="left" class="button button-icon button-clear ion-navicon"></button>
+    </ion-nav-buttons>
+    <ion-nav-view animation="slide-left-right"></ion-nav-view>
+  </ion-side-menu-content>
+
+  <ion-side-menu side="left">
+    <header class="bar bar-header bar-stable">
+      <h1 class="title">Menu</h1>
+    </header>
+    <ion-content class="has-header">
+      <ion-list>
+        <a nav-clear menu-close ui-sref=".dashboard" class="item item-icon-left">
+          <i class="icon ion-speedometer"></i>
+          Dashboard
+        </a>
+        <a nav-clear menu-close ui-sref=".geolocation" class="item item-icon-left">
+          <i class="icon ion-android-earth"></i>
+          Encontrar pessoas
+        </a>
+        <a nav-clear menu-close ui-sref=".connect" class="item item-icon-left">
+          <i class="icon ion-social-facebook"></i>
+          Conectar-se
+        </a>
+      </ion-list>
+    </ion-content>
+  </ion-side-menu>
+</ion-side-menus>
