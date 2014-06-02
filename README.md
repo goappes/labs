@@ -2,10 +2,28 @@ Labs - Cordova.js
 =================
 
 ## Pre-requisites
+
+### Download and install ADT in `/opt/adt-bundle`
+http://developer.android.com/sdk/index.html#download
+
+### Set follow env in ~/.bashrc or ~/.profile:
 ```shell
-install SDK Platform target-8 (Android 2.2 - API 8) in ADM:
-$ android
+# Android ADT BUNDLE
+export ANDROID_HOME="/opt/adt-bundle"
+PATH="$PATH:$ANDROID_HOME:$ANDROID_HOME/sdk/tools:$ANDROID_HOME/sdk/platform-tools"
+```
+
+### Node.js global modules
+```shell
 $ npm install -g cordova bower
+```
+
+### Open Android SDK Manager (android) and install
+```
+`Android 2.2 / SDK Platform and Google APIs` (target-8)
+`Android 4.4.2 / Google APIs (x86 System Image)` (Google Inc.:Google APIs:19)
+`Android 4.4.2 / Google APIs (ARM System Image)`
+`Extras / Google Play Services`
 ```
 
 ## Clone project
@@ -20,7 +38,7 @@ $ cordova prepare android
 $ cordova run --debug android
 ```
 
-## Debuggin (enable settings / developer / USB debug)
+## Debuggin
 ```shell
 in google chrome:
 open chrome://inspect
