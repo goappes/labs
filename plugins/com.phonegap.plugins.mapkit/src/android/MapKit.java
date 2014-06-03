@@ -62,6 +62,7 @@ public class MapKit extends CordovaPlugin {
                     if (resultCode == ConnectionResult.SUCCESS) {
                         mapView = new MapView(cordova.getActivity(),
                                 new GoogleMapOptions());
+
                         root = (ViewGroup) webView.getParent();
                         root.removeView(webView);
                         main.addView(webView);
@@ -86,7 +87,12 @@ public class MapKit extends CordovaPlugin {
                         params.addRule(RelativeLayout.CENTER_HORIZONTAL,
                                 RelativeLayout.TRUE);
 
+
                         mapView.setLayoutParams(params);
+
+                        mapView.setCornerRadius(1);
+                        mapView.setStroke(1, Color.TRANSPARENT);
+
                         mapView.onCreate(null);
                         mapView.onResume(); // FIXME: I wish there was a better way
                                             // than this...

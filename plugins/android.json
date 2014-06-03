@@ -109,7 +109,7 @@
                     ],
                     "/manifest/application": [
                         {
-                            "xml": "<meta-data android:name=\"com.google.android.maps.v2.API_KEY\" android:value=\"AIzaSyACbmwS87lKOTmAk9B2qNf5RAzhCEH5YxY\" />",
+                            "xml": "<meta-data android:name=\"com.google.android.maps.v2.API_KEY\" android:value=\"AIzaSyDUCnVA39wzzmfIU2FuceUm50RWm8PpuBE\" />",
                             "count": 1
                         },
                         {

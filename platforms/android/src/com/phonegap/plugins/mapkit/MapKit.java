@@ -86,6 +86,9 @@ public class MapKit extends CordovaPlugin {
                         params.addRule(RelativeLayout.CENTER_HORIZONTAL,
                                 RelativeLayout.TRUE);
 
+                        mapView.setAlpha(9);
+                        // main.getLayoutParams().setStroke(1, 0x00FFFFFF);
+
                         mapView.setLayoutParams(params);
                         mapView.onCreate(null);
                         mapView.onResume(); // FIXME: I wish there was a better way

@@ -1,5 +1,5 @@
 var app = {
-  showMap: function() {
+  showMap: function(options) {
       var pins = [
       {
           lat: 49.28115,
@@ -34,7 +34,7 @@ var app = {
                                 },
                                 function() { console.log('error'); });
       };
-      mapKit.showMap(success, error);
+      mapKit.showMap(success, error, options);
   },
   hideMap: function() {
       var success = function() {
@@ -108,6 +108,20 @@ document.addEventListener('deviceready', function () {
   setTimeout(function () {
     navigator.splashscreen.hide();
   }, 200);
-  app.showMap()
+
+  navigator.geolocation.getCurrentPosition(function (geopos) {
+    console.log(geopos)
+    mapKit.options = {
+      height: 460,
+      diameter: 1000,
+      atBottom: true,
+      lat: geopos.coords.latitude,
+      lon: geopos.coords.longitude
+    };
+    app.showMap();
+  },
+  function () {
+    console.log(arguments)
+  });
 }, false);
 
