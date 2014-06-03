@@ -37,8 +37,6 @@ angular.module('app.map', [])
       };
 
       scope.map = new google.maps.Map(document.getElementById(attrs.id), options);
-
-      element.addClass('map');
     }
   };
 });
