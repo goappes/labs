@@ -1,73 +1,7 @@
-var app = {
-  showMap: function(options) {
-      var pins = [
-      {
-          lat: 49.28115,
-          lon: -123.10450,
-          title: "A Cool Title",
-          snippet: "A Really Cool Snippet",
-          icon: mapKit.iconColors.HUE_ROSE
-      },
-      {
-          lat: 49.27503,
-          lon: -123.12138,
-          title: "A Cool Title, with no Snippet",
-          icon: {
-            type: "asset",
-            resource: "www/img/logo.png", //an image in the asset directory
-            pinColor: mapKit.iconColors.HUE_VIOLET //iOS only
-          }
-      },
-      {
-          lat: 49.28286,
-          lon: -123.11891,
-          title: "Awesome Title",
-          snippet: "Awesome Snippet",
-          icon: mapKit.iconColors.HUE_GREEN
-      }];
-      var error = function() {
-        console.log(arguments);
-      };
-      var success = function() {
-        mapKit.addMapPins(pins, function() { 
-                                    console.log('adMapPins success');  
-                                },
-                                function() { console.log('error'); });
-      };
-      mapKit.showMap(success, error, options);
-  },
-  hideMap: function() {
-      var success = function() {
-        console.log('Map hidden');
-      };
-      var error = function() {
-        console.log('error');
-      };
-      mapKit.hideMap(success, error);
-  },
-  clearMapPins: function() {
-      var success = function() {
-        console.log('Map Pins cleared!');
-      };
-      var error = function() {
-        console.log('error');
-      };
-      mapKit.clearMapPins(success, error);
-  },
-  changeMapType: function() {
-      var success = function() {
-        console.log('Map Type Changed');
-      };
-      var error = function() {
-        console.log('error');
-      };
-      mapKit.changeMapType(mapKit.mapType.MAP_TYPE_SATELLITE, success, error);
-  }
-}
-
-
 angular.module('app.root', [
   'app.auth',
+  'app.geolocation',
+  'app.map',
   'app.app-ctrl'
 ]);
 
@@ -79,8 +13,8 @@ angular.module('app.connect', [
   'app.connect.connect-ctrl'
 ]);
 
-angular.module('app.geolocation', [
-  'app.geolocation.geolocation-ctrl'
+angular.module('app.search', [
+  'app.search.search-ctrl'
 ]);
 
 angular.module('app', [
@@ -88,7 +22,7 @@ angular.module('app', [
   'app.root',
   'app.dashboard',
   'app.connect',
-  'app.geolocation'
+  'app.search'
 ])
 .run(function ($ionicPlatform) {
   $ionicPlatform.ready(function () {
@@ -108,20 +42,11 @@ document.addEventListener('deviceready', function () {
   setTimeout(function () {
     navigator.splashscreen.hide();
   }, 200);
-
-  navigator.geolocation.getCurrentPosition(function (geopos) {
-    console.log(geopos)
-    mapKit.options = {
-      height: 460,
-      diameter: 1000,
-      atBottom: true,
-      lat: geopos.coords.latitude,
-      lon: geopos.coords.longitude
-    };
-    app.showMap();
-  },
-  function () {
-    console.log(arguments)
-  });
 }, false);
+
+// $scope.loading = $ionicLoading.show({
+//   content: 'Getting current location...',
+//   showBackdrop: false
+// });
+// $scope.loading.hide();
 
