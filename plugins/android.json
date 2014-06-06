@@ -39,6 +39,14 @@
                         {
                             "xml": "<feature name=\"NetworkStatus\"><param name=\"android-package\" value=\"org.apache.cordova.networkinformation.NetworkManager\" /></feature>",
                             "count": 1
+                        },
+                        {
+                            "xml": "<feature name=\"Device\"><param name=\"android-package\" value=\"org.apache.cordova.device.Device\" /></feature>",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<feature name=\"Keyboard\"><param name=\"android-package\" value=\"com.ionic.keyboard.IonicKeyboard\" /><param name=\"onload\" value=\"true\" /></feature>",
+                            "count": 1
                         }
                     ],
                     "/widget": []
@@ -66,7 +74,7 @@
                             "count": 1
                         },
                         {
-                            "xml": "<activity android:label=\"@string/fb_app_name\" android:name=\"com.facebook.LoginActivity\" />",
+                            "xml": "<activity android:label=\"@string/fb_app_name\" android:name=\"com.facebook.LoginActivity\" android:theme=\"@android:style/Theme.Translucent.NoTitleBar\" />",
                             "count": 1
                         }
                     ],
@@ -114,6 +122,12 @@
             "PACKAGE_NAME": "br.com.dumba.labs"
         },
         "org.apache.cordova.network-information": {
+            "PACKAGE_NAME": "br.com.dumba.labs"
+        },
+        "org.apache.cordova.device": {
+            "PACKAGE_NAME": "br.com.dumba.labs"
+        },
+        "com.ionic.keyboard": {
             "PACKAGE_NAME": "br.com.dumba.labs"
         }
     },
