@@ -1,6 +1,6 @@
 angular.module('app.search.search-ctrl', [])
 
-.controller('SearchCtrl', function ($scope, $state) {
+.controller('SearchCtrl', function ($scope) {
 })
 
 .config(function ($stateProvider, $urlRouterProvider){

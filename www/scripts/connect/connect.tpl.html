@@ -1,8 +1,9 @@
 <ion-view title="Conectar">
   <ion-content padding="true">
-    <button class="button button-positive" ng-click="auth.login()">
+    <button class="button button-positive" ng-click="auth.login()"  ng-show="device.online">
       <i class="icon ion-social-facebook"></i>
       Conectar com o Facebook
     </button>
+    <h2 ng-hide="device.online">Dispositivo está offline, não é possível conectar com o facebook...</h2>
   </ion-content>
 </ion-view>

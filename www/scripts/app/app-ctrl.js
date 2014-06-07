@@ -1,23 +1,10 @@
 angular.module('app.app-ctrl', [])
 
-.controller('AppCtrl', function ($scope, $state, auth) {
+.controller('AppCtrl', function ($scope, $state, auth, device) {
   $scope.$state = $state;
   $scope.auth = auth;
-  $scope.online = false;
-
-  document.addEventListener('online', function () {
-    console.log('online')
-    $scope.apply(function () {
-      $scope.online = true;
-    });
-  }, false);
-
-  document.addEventListener('offline', function () {
-    console.log('offline')
-    $scope.apply(function () {
-      $scope.online = false;
-    });
-  }, false);
+  $scope.device = device;
+  auth.getLoginStatus();
 })
 .config(function ($stateProvider, $urlRouterProvider) {
   $urlRouterProvider
