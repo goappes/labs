@@ -1,4 +1,5 @@
 angular.module('app.root', [
+  // 'app.conf',
   'app.storage',
   'app.device',
   'app.auth',
