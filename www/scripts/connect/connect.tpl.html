@@ -1,4 +1,4 @@
-<ion-view title="Conectar">
+<!-- <ion-view title="Conectar">
   <ion-content padding="true">
     <button class="button button-positive" ng-click="auth.login()"  ng-show="device.online">
       <i class="icon ion-social-facebook"></i>
@@ -6,4 +6,23 @@
     </button>
     <h2 ng-hide="device.online">Dispositivo está offline, não é possível conectar com o facebook...</h2>
   </ion-content>
-</ion-view>
+</ion-view> -->
+<ion-view title="Sign-In">
+  <ion-content has-header="true">
+    <div class="list">
+      <label class="item item-input">
+        <span class="input-label">Login</span>
+        <input type="text" ng-model="user.login">
+      </label>
+      <label class="item item-input">
+        <span class="input-label">Senha</span>
+        <input type="password" ng-model="user.password">
+      </label>
+    </div>
+    <div class="padding">
+      <button class="button button-block button-positive" ng-click="signIn()">
+        Entrar
+      </button>
+    </div>
+  </content>
+</view>
