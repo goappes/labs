@@ -1,0 +1,41 @@
+// https://cloudant.com/blog/cors-and-reverse-proxies-in-node-js-express/#.Uw41LVGJAy0
+var request = require('request');
+
+
+module.exports = function (grunt) {
+  var forward = function (pattern, host) {
+    return function (req, res, next) {
+      var handleResponse = function (err, response, body) {
+        if (err) {
+          grunt.log.error('The API server is fallen, or not responding!');
+          grunt.log.error(err);
+        }
+
+        next(err);
+      };
+
+      if (req.url.match(pattern)) {
+        var requestPath = req.url.match(pattern)[1],
+            requstUrl = [host, requestPath].join('/'),
+            requestMethod = req.method.toLowerCase();
+
+        req.pipe(request[requestMethod](requstUrl, null, handleResponse)).pipe(res);
+      } else {
+        next();
+      }
+    }
+  };
+
+  grunt.registerTask('server', 'Start web server.', function () {
+    var server = require('express')();
+
+    grunt.task.run(['bower_install', 'make', 'watch']);
+
+    server.use(require('connect-livereload')());
+
+    server.use(require('express').static('app'));
+    server.use(forward(/\/(.*)/, 'http://localhost:3000'));
+    server.listen(9000);
+  });
+
+};

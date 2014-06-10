@@ -20,38 +20,115 @@ module.exports = function (grunt) {
     clean: {
     },
 
+    ripple: {
+      options: {
+        keepAlive: true
+      },
+      dist: {
+        path: '<%= conf.distDir %>'
+      },
+    },
+
+    copy: {
+      dist: {
+        files: [
+          {
+            cwd: '<%= conf.appDir %>/bower_components',
+            src: ['ionic/**'],
+            dest: '<%= conf.distDir %>/bower_components',
+            expand: true
+          },
+          {
+            cwd: '<%= conf.appDir %>/styles',
+            src: ['**'],
+            dest: '<%= conf.distDir %>/styles',
+            expand: true
+          },
+          {
+            cwd: '<%= conf.appDir %>/images',
+            src: ['**'],
+            dest: '<%= conf.distDir %>/images',
+            expand: true
+          }
+        ]       
+      }
+    },
+
+    concat: {
+      dist: {
+        src: ['<%= conf.appDir %>/scripts/**/*.js', '!<%= conf.appDir %>/**/*.spec.js'],
+        dest: '<%= conf.distDir %>/scripts/app-bundle.js'
+      },
+    },
+
     generate_index: {
       options: {
         pkg: '<%= pkg %>',
-        env: process.env.NODE_ENV || 'development'
+        env: process.env.NODE_ENV || 'development',
+
+        // override main components
+        overrides: {
+          // @todo: make regexp to ignore dependencies
+          'angular': false,
+          'angular-animate': false,
+          'angular-sanitize': false,
+          'angular-ui-router': false,
+          'ionic': { dependencies: [], files: ['./js/ionic.bundle.min.js'] },
+        }
       },
-      server: {
+      
+      // generate index for development
+      development: {
         options: {
           // @todo: make components concat and minification
           // concatJs: false,
-          // concatCss: false,
-
-          // override main components
-          overrides: {
-            'modernizr': false
-          },
-
+          // concatCss: false
         },
 
         // app and common packages
         packages: {
           app: {
-            files: ['./app/scripts/**/*', '!./app/**/*.spec.js'],
+            files: ['<%= conf.appDir %>/scripts/**/*', '!<%= conf.appDir %>/**/*.spec.js'],
             concat: false,
             minify: false,
-            baseDir: 'app'
+            baseDir: 'src'
           }
         },
-        templateFile: 'templates/index.html.tmpl',
-        outputFile: 'app/index.html'
+
+        // index.html template
+        templateFile: '<%= conf.appDir %>/index.html.tpl',
+
+        // index.html output
+        outputFile: '<%= conf.distDir %>/index.html'
+      },
+      
+      // generate index for dist
+      dist: {
+        options: {
+          // @todo: make components concat and minification
+          // concatJs: false,
+          // concatCss: false
+        },
+
+        // app and common packages
+        packages: {
+          app: {
+            files: ['<%= conf.distDir %>/scripts/app-bundle.js'],
+            // concatTask: 'concat:dist',
+            // minifyTask: '',
+            baseDir: 'src'
+          }
+        },
+
+        // index.html template
+        templateFile: '<%= conf.appDir %>/index.html.tpl',
+
+        // index.html output
+        outputFile: '<%= conf.distDir %>/index.html'
       }
     }
   });
 
-  grunt.registerTask('make', 'Make files', ['generate_index']);
+  grunt.registerTask('make', 'Make files', ['concat:dist', 'copy:dist', 'generate_index:dist']);
+  grunt.registerTask('server', 'Start ripple server', ['make', 'ripple:dist']);
 };
