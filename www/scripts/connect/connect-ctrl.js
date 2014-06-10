@@ -5,13 +5,17 @@ angular.module('app.connect.connect-ctrl', [])
     login: 'joaopintoneto',
     password: 'dumba123'
   };
+
+  $scope.errors = {};
   
   $scope.signIn = function () {
     auth.login($scope.user.login, $scope.user.password)
       .then(function (data) {
-        console.log(data)
-      }, function (data) {
-        console.log(data)
+        $state.go('root.dashboard');
+      }, function (response) {
+        if (response.data.error === 'invalid_grant') {
+          $scope.errors['invalid_grant'] = 'Login ou senha inválida';
+        }
       });
   };
 })

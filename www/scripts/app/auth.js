@@ -15,7 +15,7 @@ angular.module('app.auth', [])
     },
     login: function (login, password) {
       var self = this;
-      var req = $http.post('http://192.168.0.6:3000/api/v1/token', {
+      var req = $http.post('http://192.168.0.117:3000/api/v1/token', {
         'grant_type': 'password',
         'client_id': 'dumba.labs',
         'client_secret': 'dumb4.l4b$.m0b1l3.s3cr3t',
@@ -48,7 +48,7 @@ angular.module('app.auth', [])
       var defered = $q.defer();
 
       if (!self.user) {
-        $http.get('http://192.168.0.6:3000/api/v1/me')
+        $http.get('http://192.168.0.117:3000/api/v1/me')
           .then(function (res) {
             var user = res.data;
             self.user = user;
@@ -102,7 +102,9 @@ angular.module('app.auth', [])
     },
     redirectToAttemptedUrl: function () {
       console.log('Agora está logado, pode ir para para:', this.redirectToUrlAfterLogin);
-      $state.transitionTo(this.redirectToUrlAfterLogin);
+      if (this.redirectToUrlAfterLogin) {
+        $state.transitionTo(this.redirectToUrlAfterLogin);
+      }
     }
   };
 })
