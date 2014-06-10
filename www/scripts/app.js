@@ -1,5 +1,5 @@
 angular.module('app.root', [
-  // 'app.conf',
+  'app.conf',
   'app.storage',
   'app.device',
   'app.auth',
@@ -37,16 +37,13 @@ angular.module('app', [
     if (window.StatusBar) {
       // org.apache.cordova.statusbar required
       StatusBar.styleDefault();
-      navigator.splashscreen.hide();
     }
   });
 })
 
 document.addEventListener('deviceready', function () {
   angular.bootstrap(angular.element(document), ['app']);
-  setTimeout(function () {
-    navigator.splashscreen.hide();
-  }, 200);
+  navigator.splashscreen.hide();
 }, false);
 
 // $scope.loading = $ionicLoading.show({

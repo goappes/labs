@@ -4,7 +4,6 @@ angular.module('app.app-ctrl', [])
   $scope.$state = $state;
   $scope.auth = auth;
   $scope.device = device;
-  // auth.getLoginStatus();
 })
 .config(function ($stateProvider, $urlRouterProvider) {
   $urlRouterProvider
@@ -16,13 +15,13 @@ angular.module('app.app-ctrl', [])
       abstract: true,
       controller: 'AppCtrl',
       templateUrl: 'scripts/app/root.tpl.html',
-      resolve: {
-        isLoggedIn: function (auth) {
-          return auth.isLoggedIn();
-        }
-      },
       onEnter: function () {
         console.log('enter root');
       }
     })
-});
+})
+// .run(function ($rootScope, $state, $stateParams) {
+//   $rootScope.$on('$stateChangeStart', function (event, toState, toStateParams) {
+//     console.log('$stateChangeStart')
+//   });
+// });
