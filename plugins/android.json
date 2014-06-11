@@ -68,9 +68,6 @@
         "org.apache.cordova.splashscreen": {
             "PACKAGE_NAME": "br.com.dumba.labs"
         },
-        "org.apache.cordova.statusbar": {
-            "PACKAGE_NAME": "br.com.dumba.labs"
-        },
         "org.apache.cordova.geolocation": {
             "PACKAGE_NAME": "br.com.dumba.labs"
         },

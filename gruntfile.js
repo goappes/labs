@@ -18,36 +18,29 @@ module.exports = function (grunt) {
     conf: conf,
 
     clean: {
+      dist: ['<%= conf.distDir %>/*', '!<%= conf.distDir %>/.gitkeep']
     },
 
     ripple: {
       options: {
-        keepAlive: true
+        keepAlive: true,
+        path: './'
       },
-      dist: {
-        path: '<%= conf.distDir %>'
-      },
+      dist: {}
     },
 
     copy: {
       dist: {
         files: [
           {
-            cwd: '<%= conf.appDir %>/bower_components',
-            src: ['ionic/**'],
-            dest: '<%= conf.distDir %>/bower_components',
-            expand: true
-          },
-          {
-            cwd: '<%= conf.appDir %>/styles',
-            src: ['**'],
-            dest: '<%= conf.distDir %>/styles',
-            expand: true
-          },
-          {
-            cwd: '<%= conf.appDir %>/images',
-            src: ['**'],
-            dest: '<%= conf.distDir %>/images',
+            cwd: '<%= conf.appDir %>',
+            src: [
+              '**',
+              '!bower_components/angular*/**',
+              '!scripts/**',
+              '!*.tpl'
+            ],
+            dest: '<%= conf.distDir %>',
             expand: true
           }
         ]       
@@ -61,74 +54,45 @@ module.exports = function (grunt) {
       },
     },
 
+    html2js: {
+      options: {
+        module: 'app.templates',
+        singleModule: true,
+        quoteChar: '\''
+      },
+      dist: {
+        src: ['<%= conf.appDir %>/**/*.tpl.html'],
+        dest: '<%= conf.distDir %>/scripts/templates.js'
+      },
+    },
+
     generate_index: {
       options: {
         pkg: '<%= pkg %>',
         env: process.env.NODE_ENV || 'development',
-
-        // override main components
         overrides: {
-          // @todo: make regexp to ignore dependencies
           'angular': false,
           'angular-animate': false,
           'angular-sanitize': false,
           'angular-ui-router': false,
-          'ionic': { dependencies: [], files: ['./js/ionic.bundle.min.js'] },
+          'ionic': './js/ionic.bundle.min.js'
         }
       },
-      
-      // generate index for development
-      development: {
-        options: {
-          // @todo: make components concat and minification
-          // concatJs: false,
-          // concatCss: false
-        },
 
-        // app and common packages
-        packages: {
-          app: {
-            files: ['<%= conf.appDir %>/scripts/**/*', '!<%= conf.appDir %>/**/*.spec.js'],
-            concat: false,
-            minify: false,
-            baseDir: 'src'
-          }
-        },
-
-        // index.html template
-        templateFile: '<%= conf.appDir %>/index.html.tpl',
-
-        // index.html output
-        outputFile: '<%= conf.distDir %>/index.html'
-      },
-      
       // generate index for dist
       dist: {
-        options: {
-          // @todo: make components concat and minification
-          // concatJs: false,
-          // concatCss: false
-        },
-
-        // app and common packages
         packages: {
           app: {
-            files: ['<%= conf.distDir %>/scripts/app-bundle.js'],
-            // concatTask: 'concat:dist',
-            // minifyTask: '',
+            files: ['<%= conf.distDir %>/scripts/*.js'],
             baseDir: 'src'
           }
         },
-
-        // index.html template
         templateFile: '<%= conf.appDir %>/index.html.tpl',
-
-        // index.html output
         outputFile: '<%= conf.distDir %>/index.html'
       }
     }
   });
 
-  grunt.registerTask('make', 'Make files', ['concat:dist', 'copy:dist', 'generate_index:dist']);
+  grunt.registerTask('make', 'Make files', ['bower_install', 'clean:dist', 'concat:dist', 'html2js:dist', 'copy:dist', 'generate_index:dist']);
   grunt.registerTask('server', 'Start ripple server', ['make', 'ripple:dist']);
 };

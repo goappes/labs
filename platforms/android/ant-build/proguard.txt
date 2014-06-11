@@ -1,0 +1,3 @@
+# view AndroidManifest.xml #generated:10
+-keep class br.com.dumba.labs.dumbalabs { <init>(...); }
+
