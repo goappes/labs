@@ -75,7 +75,7 @@ module.exports = function (grunt) {
           'angular-animate': false,
           'angular-sanitize': false,
           'angular-ui-router': false,
-          'ionic': './js/ionic.bundle.min.js'
+          'ionic': { dependencies: [], files:'./js/ionic.bundle.min.js' }
         }
       },
 
