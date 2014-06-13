@@ -1,6 +1,6 @@
-angular.module('app.connect.connect-ctrl', [])
+angular.module('app.login.login-ctrl', [])
 
-.controller('ConnectCtrl', function ($scope, $state, auth) {
+.controller('LoginCtrl', function ($scope, $state, auth) {
   $scope.user = {
     login: 'joaopintoneto',
     password: 'dumba123'
@@ -22,17 +22,19 @@ angular.module('app.connect.connect-ctrl', [])
 
 .config(function ($stateProvider, $urlRouterProvider){
   $stateProvider
-    .state('root.connect', {
-      url: '/connect',
-      controller: 'ConnectCtrl',
-      templateUrl: 'scripts/connect/connect.tpl.html',
+    .state('login', {
+      // abstract: true,
+      url: '/login',
+      controller: 'LoginCtrl',
+      templateUrl: 'scripts/login/login.tpl.html',
       onEnter: function () {
-        console.log('enter root.connect');
+        console.log('enter login');
       }
     })
 
   $stateProvider
-    .state('root.logout', {
+    .state('logout', {
+      // abstract: true,
       url: '/logout',
       onEnter: function ($state, auth) {
         auth.logout();

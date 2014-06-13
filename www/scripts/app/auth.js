@@ -15,7 +15,8 @@ angular.module('app.auth', [])
     },
     login: function (login, password) {
       var self = this;
-      var req = $http.post('http://192.168.0.117:3000/api/v1/token', {
+      // var req = $http.post('https://dev.dumba.com.br/api/v1/token', {
+      var req = $http.post('http://192.168.0.6:3000/api/v1/token', {
         'grant_type': 'password',
         'client_id': 'dumba.labs',
         'client_secret': 'dumb4.l4b$.m0b1l3.s3cr3t',
@@ -23,6 +24,37 @@ angular.module('app.auth', [])
         'password': password
       });
       
+      req.then(function (res) {
+        var data = res.data;
+        storage.set('authenticated', true);
+
+        self.setAccessToken(data.access_token);
+        self.setRefreshToken(data.refresh_token);
+        self.setTokenExpirationDate(data.expires_in);
+
+        self.userInfo();
+        self.redirectToAttemptedUrl();
+      }, function (err) {
+        $rootScope.$broadcast('auth.error', err);
+        self.reset();
+      });
+      
+      return req;
+    },
+    refreshToken: function () {
+      var self = this;
+      var refreshToken = self.getRefreshToken();
+
+      if (!refreshToken) return $q.reject('refresh token not exists');
+
+      // var req = $http.post('https://dev.dumba.com.br/api/v1/token', {
+      var req = $http.post('http://192.168.0.6:3000/api/v1/token', {
+        'grant_type': 'refresh_token',
+        'client_id': 'dumba.labs',
+        'client_secret': 'dumb4.l4b$.m0b1l3.s3cr3t',
+        'refresh_token': refreshToken
+      });
+
       req.then(function (res) {
         var data = res.data;
         storage.set('authenticated', true);
@@ -48,7 +80,8 @@ angular.module('app.auth', [])
       var defered = $q.defer();
 
       if (!self.user) {
-        $http.get('http://192.168.0.117:3000/api/v1/me')
+        // $http.get('https://dev.dumba.com.br/api/v1/me')
+        $http.get('http://192.168.0.6:3000/api/v1/me')
           .then(function (res) {
             var user = res.data;
             self.user = user;
@@ -79,8 +112,11 @@ angular.module('app.auth', [])
       
       return expires_at;
     },
+    getTokenExpirationDate: function (expires_in) {
+      return storage.get('token.expires_at');
+    },
     setRefreshToken: function (refresh_token) {
-      storage.get('token.refresh_token', refresh_token);
+      storage.set('token.refresh_token', refresh_token);
     },
     getAccessToken: function () {
       return storage.get('token.access_token');
@@ -89,8 +125,8 @@ angular.module('app.auth', [])
       return storage.get('token.refresh_token');
     },
     isTokenExpired: function () {
-      var token = this.getAccessToken();
-      return (token && token.expires_at && new Date(token.expires_at) < new Date())
+      var expires_at = this.getTokenExpirationDate();
+      return expires_at && new Date(expires_at) < new Date();
     },
     saveAttemptUrl: function () {
       if (!$state.includes('root.connect')) {
@@ -139,7 +175,7 @@ angular.module('app.auth', [])
         auth.reset();
         auth.saveAttemptUrl();
         $rootScope.$broadcast('auth.unauthorized', config);
-        $state.transitionTo('root.connect');
+        $state.transitionTo('login');
       }
 
       return $q.reject(config);
@@ -156,3 +192,4 @@ angular.module('app.auth', [])
 // https://github.com/andreareginato/oauth-ng
 // http://aleksandrov.ws/2013/09/12/restful-api-with-nodejs-plus-mongodb/
 // curl --header "Accept: application/json" --header "Content-Type: application/json" -X POST -d '{"grant_type":"password","client_id":"dumba.labs","client_secret":"dumb4.l4b$.m0b1l3.s3cr3t","username":"joaopintoneto","password":"dumba123"}' http://localhost:3000/api/v1/token
+// curl --header "Accept: application/json" --header "Content-Type: application/json" -X POST -d '{"grant_type":"refresh_token","client_id":"dumba.labs","client_secret":"dumb4.l4b$.m0b1l3.s3cr3t","refresh_token":"oY+BAVoSjflvKp2KVG+TqIEwKLXz9L9xsrJ8t5Y5PFk="}' http://localhost:3000/api/v1/token

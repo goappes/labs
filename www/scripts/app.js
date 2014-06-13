@@ -15,8 +15,8 @@ angular.module('app.dashboard', [
   'app.dashboard.dashboard-ctrl'
 ]);
 
-angular.module('app.connect', [
-  'app.connect.connect-ctrl'
+angular.module('app.login', [
+  'app.login.login-ctrl'
 ]);
 
 angular.module('app.search', [
@@ -27,7 +27,7 @@ angular.module('app', [
   'ionic',
   'app.root',
   'app.dashboard',
-  'app.connect',
+  'app.login',
   'app.search'
 ])
 .run(function ($ionicPlatform) {

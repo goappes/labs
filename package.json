@@ -18,7 +18,7 @@
     "build": "cordova build",
     "make": "grunt make",
     "clean": "grunt clean",
-    "start": "grunt server"
+    "start": "grunt serve"
   },
   "repository": {
     "type": "git",

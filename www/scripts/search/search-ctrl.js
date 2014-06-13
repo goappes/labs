@@ -7,6 +7,9 @@ angular.module('app.search.search-ctrl', [])
   $stateProvider
     .state('root.search', {
       url: '/search',
+      data: {
+        requireLogin: true
+      },
       controller: 'SearchCtrl',
       templateUrl: 'scripts/search/search.tpl.html',
       onEnter: function () {

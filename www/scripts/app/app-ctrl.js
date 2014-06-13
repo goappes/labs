@@ -22,10 +22,10 @@ angular.module('app.app-ctrl', [])
 })
 .run(function ($rootScope, $state, auth) {
   $rootScope.$on('$stateChangeStart', function (e, toState, toParams, fromState, fromParams) {
-    console.log(toState)
+    console.log('ta logado?', auth.isLoggedIn())
     if (!auth.isLoggedIn() && toState.data && toState.data.requireLogin) {
       e.preventDefault();
-      $state.go('root.connect');
+      $state.go('login');
     }
   });
 });
