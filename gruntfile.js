@@ -1,7 +1,7 @@
 module.exports = function (grunt) {
   var conf = {
-    appDir:   'src',
-    distDir:  'www',
+    appDir:   'www',
+    distDir:  'dist',
     imgDir:   '<%= conf.appDir %>/images',
     jsDir:    '<%= conf.appDir %>/scripts',
     cssDir:   '<%= conf.appDir %>/styles',
@@ -26,10 +26,11 @@ module.exports = function (grunt) {
         keepAlive: true,
         path: './'
       },
-      dist: {}
+      www: {}
     },
 
     copy: {
+      // filter dist necessary files
       dist: {
         files: [
           {
@@ -37,8 +38,9 @@ module.exports = function (grunt) {
             src: [
               '**',
               '!bower_components/angular*/**',
-              '!scripts/**',
-              '!*.tpl'
+              '!**/scss/**',
+              '!**/{*.md,*.json,*.tpl}',
+              '!scripts/**'
             ],
             dest: '<%= conf.distDir %>',
             expand: true
@@ -94,5 +96,5 @@ module.exports = function (grunt) {
   });
 
   grunt.registerTask('make', 'Make files', ['bower_install', 'clean:dist', 'concat:dist', 'html2js:dist', 'copy:dist', 'generate_index:dist']);
-  grunt.registerTask('server', 'Start ripple server', ['make', 'ripple:dist']);
+  grunt.registerTask('serve', 'Serve www static files with ripple', ['ripple:www']);
 };

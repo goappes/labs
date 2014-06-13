@@ -36,4 +36,4 @@ coverage
 # Dependency directory
 node_modules
 
-www
+dist
