@@ -40,6 +40,9 @@ $ cordova run --debug android
 
 ## Debuggin
 ```shell
+in ripple:
+grunt serve
+
 in google chrome:
 open chrome://inspect
 
