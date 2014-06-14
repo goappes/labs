@@ -15,7 +15,7 @@
     
     <!-- cordova -->
     <script type="text/javascript" src="cordova.js"></script>
-    <script type="text/javascript" src="PushNotification.js"></script>
+    <!-- // <script type="text/javascript" src="PushNotification.js"></script> -->
 
     <!-- libs --><% components.javascripts.forEach(function(file) { %>
     <script src="<%= file %>"></script><% }); %>

@@ -11,7 +11,7 @@ angular.module('app.auth', [])
       storage.remove('token.expires_at');
     },
     isLoggedIn: function () {
-      return storage.get('authenticated');
+      return !!storage.get('authenticated');
     },
     login: function (login, password) {
       var self = this;
@@ -152,6 +152,7 @@ angular.module('app.auth', [])
       var token = auth.getAccessToken();
 
       if (auth.isTokenExpired()) {
+        console.log('EXPIROU', config);
         $rootScope.$broadcast('auth.expired', token);
       }
 
@@ -187,6 +188,16 @@ angular.module('app.auth', [])
   $httpProvider.interceptors.push('auth_ExpiredInterceptor');
   $httpProvider.interceptors.push('auth_UnauthorizedInterceptor');
 })
+
+// .run(function ($rootScope, auth) {
+//   $rootScope.$on('auth.expired', function () {
+//     auth.refreshToken().then(function () {
+//       console.log('RENOVOU', arguments)
+//     }, function () {
+//       console.log('NAO RENOVOU', arguments)
+//     });
+//   });
+// })
 
 
 // https://github.com/andreareginato/oauth-ng

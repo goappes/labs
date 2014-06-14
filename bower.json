@@ -20,6 +20,7 @@
     "tests"
   ],
   "dependencies": {
-    "ionic": "driftyco/ionic-bower#master"
+    "ionic": "driftyco/ionic-bower#master",
+    "angular-http-auth": "~1.2.1"
   }
 }

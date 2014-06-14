@@ -23,7 +23,6 @@ angular.module('app.login.login-ctrl', [])
 .config(function ($stateProvider, $urlRouterProvider){
   $stateProvider
     .state('login', {
-      // abstract: true,
       url: '/login',
       controller: 'LoginCtrl',
       templateUrl: 'scripts/login/login.tpl.html',
@@ -34,11 +33,10 @@ angular.module('app.login.login-ctrl', [])
 
   $stateProvider
     .state('logout', {
-      // abstract: true,
       url: '/logout',
       onEnter: function ($state, auth) {
         auth.logout();
-        $state.transitionTo('root.dashboard');
+        $state.transitionTo('login');
       }
     })
 });

@@ -37,8 +37,9 @@ module.exports = function (grunt) {
             cwd: '<%= conf.appDir %>',
             src: [
               '**',
-              '!bower_components/angular*/**',
+              '!bower_components/angular{,-animate,-sanitize,-ui-router}/**',
               '!**/scss/**',
+              '!**/LICENSE',
               '!**/{*.md,*.json,*.tpl}',
               '!scripts/**'
             ],
