@@ -31,6 +31,23 @@ angular.module('app.geolocation', [])
 
       return deferred.promise;
     },
+    geoCoder: function (params) {
+      var deferred = $q.defer();
+      var geocoder = new google.maps.Geocoder();
+
+      geocoder.geocode(params, function (results, status) {
+        if (status === google.maps.GeocoderStatus.OK && results[0]) {
+          deferred.resolve({
+            address: results[0].formatted_address,
+            latlng: [results[0].geometry.location.lat(), results[0].geometry.location.lng()]
+          });
+        } else {
+          deferred.reject('No results');
+        }
+      });
+
+      return deferred.promise;
+    },
     watchPosition: function () {
       var self = this;
 

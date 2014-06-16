@@ -17,6 +17,9 @@
     <script type="text/javascript" src="cordova.js"></script>
     <!-- // <script type="text/javascript" src="PushNotification.js"></script> -->
 
+    <!-- google maps -->
+    <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=true"></script>
+
     <!-- libs --><% components.javascripts.forEach(function(file) { %>
     <script src="<%= file %>"></script><% }); %>
 

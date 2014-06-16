@@ -6,7 +6,16 @@
     </target> -->
     <target name="-pre-build">
         <echo message="Generating dist"/>
-        <delete dir="assets/www"/>
+        <!-- <copy file="assets/www/cordova.js" tofile="../../dist/cordova.js"/>
+        <copy file="assets/www/cordova_plugins.js" tofile="../../dist/cordova_plugins.js"/>
+        <copy todir="../../dist/plugins">
+          <fileset dir="assets/www/plugins"/>
+        </copy> -->
+        <delete dir="assets/www/scripts"/>
+        <delete dir="assets/www/styles"/>
+        <delete dir="assets/www/images"/>
+        <delete dir="assets/www/bower_components"/>
+        <delete file="assets/www/index.html.tpl"/>
         <exec dir="../../" command="grunt make" failifexecutionfails="true" failonerror="true"/>
         <echo message="Updating the www directory"/>
         <copy todir="assets/www">

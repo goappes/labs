@@ -18,7 +18,7 @@ module.exports = function (grunt) {
     conf: conf,
 
     clean: {
-      dist: ['<%= conf.distDir %>/*', '!<%= conf.distDir %>/.gitkeep']
+      dist: ['<%= conf.distDir %>/*']
     },
 
     ripple: {
@@ -61,7 +61,10 @@ module.exports = function (grunt) {
       options: {
         module: 'app.templates',
         singleModule: true,
-        quoteChar: '\''
+        quoteChar: '\'',
+        rename: function (moduleName) {
+          return moduleName.replace(/^.*\/scripts\//, 'scripts/');
+        }
       },
       dist: {
         src: ['<%= conf.appDir %>/**/*.tpl.html'],
@@ -78,6 +81,7 @@ module.exports = function (grunt) {
           'angular-animate': false,
           'angular-sanitize': false,
           'angular-ui-router': false,
+          'angular-http-auth': { dependencies: [], files: './src/http-auth-interceptor.js' },
           'ionic': { dependencies: [], files:'./js/ionic.bundle.min.js' }
         }
       },
@@ -87,7 +91,7 @@ module.exports = function (grunt) {
         packages: {
           app: {
             files: ['<%= conf.distDir %>/scripts/*.js'],
-            baseDir: 'src'
+            baseDir: '<%= conf.distDir %>'
           }
         },
         templateFile: '<%= conf.appDir %>/index.html.tpl',

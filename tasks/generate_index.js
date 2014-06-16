@@ -115,7 +115,7 @@ module.exports = function (grunt) {
       var files = grunt.file.expand(package.files);
       _.each(files, function (entriePath) {
         _.forOwn(filetype_matches, function (regExp, type) {
-          var dir = getCanonicalDir(entriePath, 'www/scripts', 'scripts');
+          var dir = getCanonicalDir(entriePath, 'dist/scripts', 'scripts');
           // console.log(dir)
           if (dir.match(regExp)) {
             // console.log(type);

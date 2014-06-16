@@ -1,42 +1,38 @@
 angular.module('app.map', [])
 
-.run(function ($rootScope, device) {
-  window.handleMapApiLoad = function () {
-    $rootScope.$apply(function () {
-      console.log('googleMapsStatus -> loaded!!!');
-      $rootScope.googleMapsStatus = 'loaded';
-    });
-  };
-
-  function loadScript() {
-    // $rootScope.$apply(function () {
-      console.log('googleMapsStatus -> loading...');
-      $rootScope.googleMapsStatus = 'loaging';
-    // });
-
-    var script = document.createElement('script');
-    script.type = 'text/javascript';
-    script.defer = 'defer';
-    script.async = 'async';
-    script.src = 'https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false&callback=handleMapApiLoad';
-    document.body.appendChild(script);
-  }
-
-  device.on('online', function () {
-    if (!$rootScope.googleMapsStatus || $rootScope.googleMapsStatus !== 'loaging') {
-      loadScript();
-    }
-  });
-})
-
 .controller('MapCtrl', function ($scope, geolocation, device) {
-  $scope.stopWatch = function () {
-    geolocation.stopWatch();
+  $scope.googleMarkers = [];
+
+  $scope.$watch('coords', function (coords) {
+    if (!$scope.map || !coords) return;
+    $scope.map.setCenter(coords);
+  });
+
+  $scope.$watchCollection('markers', function (markers) {
+    if (!$scope.map || !markers) return;
+    $scope.clearMarkers();
+    markers.forEach(function (marker) {
+      $scope.placeMarker(marker);
+    })
+  });
+
+  $scope.clearMarkers = function (map) {
+    // @todo: remove marker event listeners
+    $scope.googleMarkers.forEach(function (marker) {
+      marker.setMap(null);
+    });
+    $scope.googleMarkers.length = 0;
   };
 
-  $scope.setCenter = function (pos) {
-    if (!$scope.map) return;
-    $scope.map.setCenter(new google.maps.LatLng(pos.coords.latitude, pos.coords.longitude));
+  $scope.placeMarker = function (config) {
+    console.log(config);
+    var marker = new google.maps.Marker({
+      position: config.position,
+      icon: new google.maps.MarkerImage('images/' + (config.type || 'marker') + '.svg', null, null, null, new google.maps.Size(25,25)),
+      title: config.title,
+      map: $scope.map
+    });
+    $scope.googleMarkers.push(marker);
   };
 
   // geolocation.watchPosition()
@@ -52,21 +48,28 @@ angular.module('app.map', [])
     replace: true,
     template: '<div></div>',
     controller: 'MapCtrl',
+    scope: {
+      coords: '=',
+      markers: '='
+    },
     link: function (scope, element, attrs) {
-      scope.$watch('googleMapsStatus', function (status) {
-        if (status === 'loaded') {
-          scope.map = new google.maps.Map(element[0], {
-            center: new google.maps.LatLng(43.07493, -89.381388),
-            zoom: 16,
-            mapTypeId: google.maps.MapTypeId.ROADMAP
-          });
-
-          // google.maps.event.addDomListener(scope.map, 'mousedown', function (e) {
-          //   e.preventDefault();
-          //   return false;
-          // }, false);
+      scope.map = new google.maps.Map(element[0], {
+        disableDefaultUI: true,
+        mapTypeControl: true,
+        zoom: 11,
+        center: new google.maps.LatLng(-23.6824124, -46.5952992),
+        mapTypeId: google.maps.MapTypeId.ROADMAP,
+        mapTypeControlOptions: {
+          style: google.maps.MapTypeControlStyle.HORIZONTAL_BAR,
+          position: google.maps.ControlPosition.TOP_RIGTH,
+          mapTypeIds: [google.maps.MapTypeId.ROADMAP, google.maps.MapTypeId.SATELLITE]
         }
       });
+
+      // google.maps.event.addDomListener(scope.map, 'mousedown', function (e) {
+      //   e.preventDefault();
+      //   return false;
+      // }, false);
     }
   };
 });

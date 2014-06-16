@@ -2,7 +2,7 @@ angular.module('app.conf', [])
 
 .provider('conf', function () {
   this.conf = {
-    baseUrl: 'http://dumba.com.br'
+    baseUrl: 'https://dumba.com.br'
   };
 
   this.$get = function () {
