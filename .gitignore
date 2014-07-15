@@ -9,6 +9,10 @@ www/bower_components
 # platforms
 platforms/*
 
+# platforms
+plugins/*
+!plugins/android.json
+
 # Runtime data
 pids
 *.pid
