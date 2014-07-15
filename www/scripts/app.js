@@ -44,7 +44,7 @@ angular.module('app', [
   });
 })
 
-document.addEventListener('deviceready', function () {
+angular.element(document).on((window.cordova) ? 'deviceready' : 'ready',function () {
   angular.bootstrap(angular.element(document), ['app']);
   navigator.splashscreen.hide();
 }, false);

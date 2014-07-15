@@ -12,7 +12,10 @@
     <div id="fb-root"></div>
 
     <ion-nav-view></ion-nav-view>
-    
+
+    <script type="text/javascript">
+        window._cordovaNative = true;    
+    </script>
     <!-- cordova -->
     <script type="text/javascript" src="cordova.js"></script>
     <!-- // <script type="text/javascript" src="PushNotification.js"></script> -->
