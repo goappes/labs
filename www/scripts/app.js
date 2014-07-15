@@ -44,10 +44,10 @@ angular.module('app', [
   });
 })
 
-angular.element(document).on((window.cordova) ? 'deviceready' : 'ready',function () {
+angular.element(document).bind('deviceready', function () {
   angular.bootstrap(angular.element(document), ['app']);
   navigator.splashscreen.hide();
-}, false);
+});
 
 // $scope.loading = $ionicLoading.show({
 //   content: 'Getting current location...',
