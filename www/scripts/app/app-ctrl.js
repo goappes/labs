@@ -1,23 +1,9 @@
 angular.module('app.app-ctrl', [])
 
-.controller('AppCtrl', function ($scope, $state, auth) {
+.controller('AppCtrl', function ($scope, $state, auth, device, storage) {
   $scope.$state = $state;
   $scope.auth = auth;
-  $scope.online = false;
-
-  document.addEventListener('online', function () {
-    console.log('online')
-    $scope.apply(function () {
-      $scope.online = true;
-    });
-  }, false);
-
-  document.addEventListener('offline', function () {
-    console.log('offline')
-    $scope.apply(function () {
-      $scope.online = false;
-    });
-  }, false);
+  $scope.device = device;
 })
 .config(function ($stateProvider, $urlRouterProvider) {
   $urlRouterProvider
@@ -33,4 +19,12 @@ angular.module('app.app-ctrl', [])
         console.log('enter root');
       }
     })
+})
+.run(function ($rootScope, $state, auth) {
+  $rootScope.$on('$stateChangeStart', function (e, toState, toParams, fromState, fromParams) {
+    if (!auth.isLoggedIn() && toState.data && toState.data.requireLogin) {
+      e.preventDefault();
+      $state.go('login');
+    }
+  });
 });

@@ -1,16 +1,22 @@
 angular.module('app.root', [
+  'app.conf',
+  'app.templates',
+  'app.storage',
+  'app.device',
   'app.auth',
   'app.geolocation',
   'app.map',
   'app.app-ctrl'
 ]);
 
+angular.module('app.templates',[]);
+
 angular.module('app.dashboard', [
   'app.dashboard.dashboard-ctrl'
 ]);
 
-angular.module('app.connect', [
-  'app.connect.connect-ctrl'
+angular.module('app.login', [
+  'app.login.login-ctrl'
 ]);
 
 angular.module('app.search', [
@@ -21,27 +27,26 @@ angular.module('app', [
   'ionic',
   'app.root',
   'app.dashboard',
-  'app.connect',
+  'app.login',
   'app.search'
 ])
 .run(function ($ionicPlatform) {
   $ionicPlatform.ready(function () {
     // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
     // for form inputs)
-    // if(window.cordova && window.cordova.plugins.Keyboard) {
-    //   cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
-    // }
-    if(window.StatusBar) {
-      // org.apache.cordova.statusbar required
-      StatusBar.styleDefault();
+    if (window.cordova && window.cordova.plugins.Keyboard) {
+      cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
     }
+    // if (window.StatusBar) {
+      // org.apache.cordova.statusbar required
+      // StatusBar.styleDefault();
+    // }
   });
 })
 
 document.addEventListener('deviceready', function () {
-  setTimeout(function () {
-    navigator.splashscreen.hide();
-  }, 200);
+  angular.bootstrap(angular.element(document), ['app']);
+  navigator.splashscreen.hide();
 }, false);
 
 // $scope.loading = $ionicLoading.show({

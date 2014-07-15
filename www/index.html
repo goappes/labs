@@ -8,35 +8,34 @@
     <link href="bower_components/ionic/css/ionic.min.css" rel="stylesheet">
     <link href="styles/index.css" rel="stylesheet">
   </head>
-  <body animation="slide-left-right-ios7" ng-app="app">
+  <body>
     <div id="fb-root"></div>
 
     <ion-nav-view></ion-nav-view>
-
-    <!-- ionic and angularjs -->
-    <script type="text/javascript" src="bower_components/ionic/js/ionic.bundle.js"></script>
     
     <!-- cordova -->
     <script type="text/javascript" src="cordova.js"></script>
-    <script type="text/javascript" src="scripts/facebookConnectPlugin.js"></script>
-    <script type="text/javascript" src="scripts/MapKit.js"></script>
+    <!-- // <script type="text/javascript" src="PushNotification.js"></script> -->
 
     <!-- google maps -->
-    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=true"></script>
 
-    
+    <!-- libs -->
+    <script type="text/javascript" src="bower_components/ionic/js/ionic.bundle.js"></script>
+    <script type="text/javascript" src="bower_components/angular-http-auth/src/http-auth-interceptor.js"></script>
+
     <!-- app -->
-    <script type="text/javascript" src="scripts/dashboard/dashboard-ctrl.js"></script>
-
-    <script type="text/javascript" src="scripts/connect/connect-ctrl.js"></script>
-    
-    <script type="text/javascript" src="scripts/search/search-ctrl.js"></script>
-    
+    <script type="text/javascript" src="scripts/app.js"></script>
+    <script type="text/javascript" src="scripts/app/app-ctrl.js"></script>
     <script type="text/javascript" src="scripts/app/auth.js"></script>
+    <script type="text/javascript" src="scripts/app/conf.js"></script>
+    <script type="text/javascript" src="scripts/app/device.js"></script>
     <script type="text/javascript" src="scripts/app/geolocation.js"></script>
     <script type="text/javascript" src="scripts/app/map.js"></script>
-    <script type="text/javascript" src="scripts/app/app-ctrl.js"></script>
-
-    <script type="text/javascript" src="scripts/app.js"></script>
+    <script type="text/javascript" src="scripts/app/open-url.js"></script>
+    <script type="text/javascript" src="scripts/app/storage.js"></script>
+    <script type="text/javascript" src="scripts/dashboard/dashboard-ctrl.js"></script>
+    <script type="text/javascript" src="scripts/login/login-ctrl.js"></script>
+    <script type="text/javascript" src="scripts/search/search-ctrl.js"></script>
   </body>
 </html>

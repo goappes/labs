@@ -18,22 +18,23 @@
 
   <ion-side-menu side="left">
     <header class="bar bar-header bar-stable">
-      <h1 class="title">Menu --{{online}}--</h1>
+      <h1 class="title">Menu</h1>
     </header>
     <ion-content class="has-header">
       <ion-list>
-        <a nav-clear menu-close ui-sref=".dashboard" class="item item-icon-left">
-          <i class="icon ion-speedometer"></i>
+        <a nav-clear menu-close ui-sref=".dashboard" class="item">
           Dashboard
         </a>
-        <a nav-clear menu-close ui-sref=".search" class="item item-icon-left">
-          <i class="icon ion-android-earth"></i>
+        <a nav-clear menu-close ui-sref=".search" class="item">
           Encontrar pessoas
         </a>
-        <a nav-clear menu-close ui-sref=".connect" class="item item-icon-left">
-          <i class="icon ion-social-facebook"></i>
-          Conectar-se
+        <a nav-clear menu-close ui-sref="logout" class="item" ng-show="auth.isLoggedIn()">
+          Sair
         </a>
+        <!-- <a nav-clear menu-close ui-sref=".logout" class="item item-icon-left" ng-show="auth.isLoggedIn()">
+          <i class="icon ion-log-out"></i>
+          Sair
+        </a> -->
       </ion-list>
     </ion-content>
   </ion-side-menu>
