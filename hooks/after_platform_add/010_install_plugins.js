@@ -15,7 +15,7 @@ var pluginlist = {
     "org.apache.cordova.network-information": null,
     "org.apache.cordova.splashscreen": null,
 	"https://github.com/Wizcorp/phonegap-facebook-plugin.git": {
-		params: [ 'APP_ID="123456789"', 'APP_NAME="Dumba"' ]
+		params: [ '--variable APP_ID="123456789"', '--variable APP_NAME="Dumba"' ]
 	}
 };
  
